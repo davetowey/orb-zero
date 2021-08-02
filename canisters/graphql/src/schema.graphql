@@ -1,0 +1,10 @@
+type Feature {
+    id: ID!
+    geometry: Geometry
+}
+
+type Geometry {
+    id: ID!
+    geometryType: String!
+    coordinates: Blob
+}

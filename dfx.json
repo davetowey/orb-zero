@@ -1,0 +1,20 @@
+{
+  "canisters": {
+    "orb-frontend": {
+      "type": "assets",
+      "source": ["canisters/frontend/dist"]
+    },
+    "orb-tileserver": {
+      "build": "cargo build --target wasm32-unknown-unknown --package tileserver --release",
+      "candid": "canisters/tileserver/src/tileserver.did",
+      "wasm": "target/wasm32-unknown-unknown/release/tileserver.wasm",
+      "type": "custom"
+    },
+    "graphql": {
+      "type": "custom",
+      "build": "cargo build --target wasm32-unknown-unknown --package graphql --release",
+      "candid": "canisters/graphql/src/graphql.did",
+      "wasm": "target/wasm32-unknown-unknown/release/graphql.wasm"
+    }    
+  }
+}

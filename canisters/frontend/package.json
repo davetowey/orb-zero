@@ -1,0 +1,20 @@
+{
+  "name": "orb-frontend",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "build": "wp --config webpack.config.js"
+  },
+  "devDependencies": {
+    "css-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.42.0",
+    "webpack-nano": "^1.1.1"
+  },
+  "dependencies": {
+    "gql": "^1.1.2",
+    "ol": "^6.5.0",
+    "sudograph": "^0.4.3"
+  }
+}
