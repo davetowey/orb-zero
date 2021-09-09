@@ -8,10 +8,11 @@ const { query, mutation } = sudograph({
 async function getGeometry(){
   const result = await query(gql`
     query {
-      readGeometry {
+      readGeometry (search: { area: { lt: 5.0 } } ){
         id
         geometryType
         coordinates
+        area
       }
     }
   `);
@@ -19,12 +20,15 @@ async function getGeometry(){
   return feature;
 }
 
-async function createGeometry() {
+async function createGeometry(coordinates, movementId, travelTime, area ) {
   const result = await mutation(gql`
-      mutation ($coordinates: Blob!) {
+      mutation ($coordinates: Blob!, movementIt: String!, travelTime: Int, area: float) {
           createGeometry(input: {
-              geometryType: "POINT"
+              geometryType: "POLYGON"
               coordinates: $coordinates
+              movementId: $movementId
+              travelTime: $travelTime
+              area: $area
           }) {
             id
             geometryType
@@ -32,7 +36,10 @@ async function createGeometry() {
           }
       }
   `, {
-      coordinates: [0.0,0.0]
+      coordinates: coordinates,
+      movementId: movementId,
+      travelTime: travelTime,
+      area: area
   });
 
   const file = result.data.createGeometry;

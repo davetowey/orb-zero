@@ -45,18 +45,6 @@ pub struct HttpResponse {
     pub body: Vec<u8>,
 }
 
-//fn retrieve(path: &str) -> Option<&'static [u8]> {
-    // let tiles = include_dir!("canisters/tileserver/src/tiles");
-    // let tilepath = Path::new(path);
-    // return tiles.get(tilepath).map(|x| *x);
-    // let store = storage::get::<Store>();
-
-    // match store.get(&path) {
-    //     Some(content),
-    //     None,
-    // }
-//}
-
 fn get_path(url: &str) -> Option<&str> {
     url.split('?').next()
 }
@@ -66,25 +54,12 @@ fn get_path(url: &str) -> Option<&str> {
 fn http_request(request: HttpRequest) -> HttpResponse {
 
     let path: Vec<&str> = request.url.as_str().split('?').collect();
-    // let xyz: Vec<&str> = path[0].split('/').collect();
-
-    // let zoom = xyz[3].parse().unwrap();
-    // let x = xyz[1].parse().unwrap();
-    // let y = xyz[2].parse().unwrap();
-
-
-
-    // let grid = Grid::web_mercator();
-    // let bbox = grid.tile_extent(zoom, x, y);
-    // let string: &str = &*(bbox.minx.to_string());
-    // let bytes = string.as_bytes();
     
-    //let path = get_path(request.url.as_str()).unwrap_or("/");
     if let Some(bytes) = retrieve(&path[0][1..]) {
       HttpResponse {
         status_code: 200,
         headers: vec![
-            // HeaderField("Content-Encoding".to_string(), "gzip".to_string()),
+            HeaderField("Content-Encoding".to_string(), "gzip".to_string()),
             HeaderField("Access-Control-Allow-Origin".to_string(), "*".to_string()),
             HeaderField("Content-Length".to_string(), format!("{}", bytes.len())),
             HeaderField("Cache-Control".to_string(), format!("max-age={}", 600)),

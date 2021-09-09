@@ -6,5 +6,8 @@ type Feature {
 type Geometry {
     id: ID!
     geometryType: String!
-    coordinates: Blob
+    coordinates: String!
+    movementId: String!
+    travelTime: Int
+    area: Float
 }
